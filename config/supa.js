@@ -9,8 +9,9 @@ var connSupa = function () {
 
   return createClient(url, key);
 };
-
+ 
 module.exports = function () {
   console.log("O autoload carregou o módulo de conexão com bd");
+
   return connSupa;
 };
