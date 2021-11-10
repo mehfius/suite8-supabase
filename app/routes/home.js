@@ -6,8 +6,8 @@ module.exports = function(app){
 
         const main = async function (){
 
-          let { data, error } = await connection.from('suites').select('id,label,url,files,color1')
-   
+          let { data, error } = await connection.from('suites').select(`label,files,suites_config(label,url)`).like('url','https://doctor8dev2021.ga')
+
           res.render("home/index", {suites : data});
 
         }
@@ -15,4 +15,5 @@ module.exports = function(app){
         main();
 
     });
+    
 };
