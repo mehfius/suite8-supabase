@@ -9,21 +9,52 @@ module.exports = function(app){
     const conn     = app.config.supa();
 
     const main     = async function (){
-      /* 
-      const go = async function(session){
-      */
 
-        //let { data, error } = await connection.from("view_"+modules).select('medicoslabel,pacienteslabel,uuid,usersid,userslabel,a,d,id,created_at,update,label,categorylabel,category,me,share').eq('uuid',session).range(0,30)
+        if(id){
 
-        let { data, error } = await conn.from("form_"+modules).select('*').eq('uuid',session).eq('id',id).range(0,30);
+            let { data, error } = await conn.from("form_"+modules).select('*').eq('uuid',session).eq('id',id).range(0,1);
 
-      /*       return data;
+            Object.entries(data[0].form.fields).forEach(([key, value]) => {
+
+                if(value.url=='pacientes' && data[0].areas==100){
+                
+                  delete data[0].form.fields.splice(key, 1);
+               
+                }
+              
+            });
+
+             res.send(data[0]); 
+
+        }else{
+
+          let { data, error } = await conn.from("form_"+modules).select('*').range(0,1);
+
+            delete data[0].id;
+            delete data[0].uuid;
+
+            
+
+            Object.entries(data[0].form.fields).forEach(([key, value]) => {
+
+              if(value.url=='pacientes' && data[0].areas==100){
+              
+                delete data[0].form.fields.splice(key, 1);
+              
+              }
+
+              delete(value["value"]);
+              delete(value["uuidv4"]);
+              
+            });
           
-      }
+          console.log(data[0]);
+          res.send(data[0]);  
 
-      const userAreas = await go(session); */
+        }
 
-      res.send(data); 
+
+        
 
     }
 

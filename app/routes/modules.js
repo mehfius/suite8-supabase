@@ -4,17 +4,26 @@ module.exports = function(app){
 
     const session  = req.body.session;
     const modules  = req.body.modules;
+    const id       = req.body.id;
 
+    const page     = (req.body.page!=undefined)?req.body.page:0;
+    const start    = page
+    const final    = (req.body.page!=undefined)?req.body.page+30:30;
+
+   /*  console.log(start+","+final)
+ */
     const connection = app.config.supa();
 
     const main = async function (){
 
       const getUserAreas = async function(session){
+        
+        if(id){
+            var { data, error } = await connection.from("view_"+modules).select('*').eq('uuid',session).eq('id',id);
+        }else{
 
-        //let { data, error } = await connection.from("view_"+modules).select('medicoslabel,pacienteslabel,uuid,usersid,userslabel,a,d,id,created_at,update,label,categorylabel,category,me,share').eq('uuid',session).range(0,30)
-  
-
-        let { data, error } = await connection.from("view_"+modules).select('*').eq('uuid',session).range(0,30)
+          var { data, error } = await connection.from("view_"+modules).select('*').eq('uuid',session).range(start,final);
+        }
 
         return data;
           
