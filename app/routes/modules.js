@@ -5,13 +5,11 @@ module.exports = function(app){
     const session  = req.body.session;
     const modules  = req.body.modules;
     const id       = req.body.id;
-
+    const match    = req.body.match
     const page     = (req.body.page!=undefined)?req.body.page:0;
     const start    = page
     const final    = (req.body.page!=undefined)?req.body.page+30:30;
-
-   /*  console.log(start+","+final)
- */
+    
     const connection = app.config.supa();
 
     const main = async function (){
@@ -19,11 +17,19 @@ module.exports = function(app){
       const getUserAreas = async function(session){
         
         if(id){
+
             var { data, error } = await connection.from("view_"+modules).select('*').eq('uuid',session).eq('id',id);
+            
         }else{
 
-          var { data, error } = await connection.from("view_"+modules).select('*').eq('uuid',session).range(start,final);
+          if(match){
+
+            var { data, error } = await connection.from("view_"+modules).select('*').match(match).range(start,final);
+
+          }
         }
+
+        console.log(error);
 
         return data;
           

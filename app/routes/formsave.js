@@ -4,29 +4,33 @@ module.exports = function(app){
 
     const save = async function(modules,json){
 
-      json.share = (json.share)?JSON.parse(json.share):null;
-      json.users = json.info.users;
+      if(modules!=="users"){
+        
+        json.share = (json.share)?JSON.parse(json.share):null;
+        json.users = json.info.users;
 
-      if(json.info.areas==50){
+        if(json.info.areas==50){
 
-        json.medicos=json.users;
+          json.medicos=json.users;
 
-      }else if(json.info.areas==100){
+        }else if(json.info.areas==100){
 
-        json.pacientes=json.users;
+          json.pacientes=json.users;
 
+        }
+     
       }
 
       delete json["info"];
 
       let { data , error } = await conn.from(modules).upsert(json);
 
-      console.log(json);
-      console.log(error);
+        console.log(json);
+        console.log(error);
  
       return data;    
   
-    };
+  };
 
     const getUser = async function(session){
 
