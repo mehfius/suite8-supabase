@@ -21,13 +21,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mehfius/suite8-supabase.git"
+    "url": "git+https://github.com/mehfius/supabase.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mehfius/suite8-supabase/issues"
+    "url": "https://github.com/mehfius/supabase/issues"
   },
-  "homepage": "https://github.com/mehfius/suite8-supabase#readme"
+  "homepage": "https://github.com/mehfius/supabase#readme"
 }
