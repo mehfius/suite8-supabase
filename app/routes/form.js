@@ -7,6 +7,12 @@ module.exports = function(app){
     const id       = req.body.id;
 
     const conn     = app.config.supa();
+    
+    var path = require('path');
+
+    var pagename = path.basename(__filename);
+
+    app.config.log(conn,req.body,pagename);
 
     const main     = async function (){
 
@@ -23,10 +29,18 @@ module.exports = function(app){
             if(!value.attributes){
               delete(value["attributes"]);
             }
+
+            if(data[0].areas==100 && value.url=='crm'){
+
+    
+
+              delete data[0].form.fields.splice(key, 1);
+
+            }
             
           });
 
-          console.log(data[0]);
+
 
         res.send(data[0]); 
 
@@ -45,7 +59,8 @@ module.exports = function(app){
               }
             
           });
-      console.log(data[0].form.fields);
+
+
           res.send(data[0]); 
 
         }else{
@@ -68,7 +83,6 @@ module.exports = function(app){
               
             });
           
-          console.log(data[0]);
           res.send(data[0]);  
 
         }

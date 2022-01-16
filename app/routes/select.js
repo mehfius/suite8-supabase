@@ -15,8 +15,6 @@ module.exports = function(app){
 
       res.send(data);
        
-      console.log(string);
-      console.log(error);
 
     }
 

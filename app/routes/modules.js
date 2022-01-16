@@ -12,11 +12,18 @@ module.exports = function(app){
     
     const connection = app.config.supa();
 
+    var path = require('path');
+
+       var pagename = path.basename(__filename);
+            app.config.log(app.config.supa(),req.body,pagename);
+
     const main = async function (){
 
       const getUserAreas = async function(session){
         
         if(id){
+
+     
 
             var { data, error } = await connection.from("view_"+modules).select('*').eq('uuid',session).eq('id',id);
             
@@ -28,8 +35,6 @@ module.exports = function(app){
 
           }
         }
-
-        console.log(error);
 
         return data;
           

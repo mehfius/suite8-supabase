@@ -9,6 +9,7 @@ module.exports = function(app){
         json.share = (json.share)?JSON.parse(json.share):null;
         json.users = json.info.users;
 
+
         if(json.info.areas==50){
 
           json.medicos=json.users;
@@ -18,15 +19,30 @@ module.exports = function(app){
           json.pacientes=json.users;
 
         }
-     
+
+        const now = new Date(new Date()-3600*1000*3).toISOString();
+
+        if(!json.id){
+
+          json.created_at=now;
+          
+        }
+
+        json.update=now;
+
+      }else{
+
+         json.whatsapp = (json.whatsapp)?json.whatsapp.replace(/[^0-9]/g, ''):null;
+         json.telefone = (json.telefone)?json.telefone.replace(/[^0-9]/g, ''):null;
+         json.cep      = (json.cep)?json.cep.replace(/[^0-9]/g, ''):null;
+
       }
+
 
       delete json["info"];
 
       let { data , error } = await conn.from(modules).upsert(json);
 
-        console.log(json);
-        console.log(error);
  
       return data;    
   
@@ -41,6 +57,12 @@ module.exports = function(app){
     };
 
     const conn    = app.config.supa();
+
+    var path = require('path');
+
+    var pagename = path.basename(__filename);
+
+    app.config.log(conn,req.body,pagename);
 
     const json    = req.body.data;
 

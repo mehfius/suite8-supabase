@@ -5,6 +5,7 @@ module.exports = function(app){
     const password = req.body.password;
     const email    = req.body.email;
     const suite    = req.body.suite;
+    let   send     = {}
 
     res.setHeader('Access-Control-Allow-Origin', '*');
 
@@ -12,18 +13,13 @@ module.exports = function(app){
 
     const main = async function (){
 
-      let { data, error } = await connection.from('view_login').select('id,user,nav').eq('email',req.body.email).eq('password',req.body.password)
-/* 
-    let { data, error } = await connection.from('users').select('id,label,files,premium,areas(id,label,areasmodules(modules(id,label,url,premium,groups(id,label))))').eq('email',req.body.email).eq('password',req.body.password)
- */   
+      let { data, error } = await connection.from('view_login').select('*').eq('email',email).eq('password',password)
 
-      console.log(error);
-      console.log("Logado: "+data.length);
-      console.log("Email: "+req.body.email);
+      console.log("Logado: "+data.length+" / Email: "+req.body.email);
 
-       if(data.length==0){
+      if(data.length==0){
         
-        res.send(JSON.parse('[{"status":"504"}]')); 
+        send.status="504";
 
       }else{
 
@@ -32,13 +28,13 @@ module.exports = function(app){
 
         delete data[0].id 
 
-        const send = data[0];
+        send = data[0];
 
         send.status=1;
 
-        res.send(send); 
-
       }
+
+      res.send(send); 
 
     }
 
