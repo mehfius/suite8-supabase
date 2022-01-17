@@ -31,17 +31,17 @@ module.exports = function(app){
         
         var remetente = nodemailer.createTransport({
 
-          host: "smtp.umbler.com",
-          service: "smtp.umbler.com",
+          host: process.env['emailhost'],
+          service: process.env['emailhost'],
           port: 587,
           secure: false,
-          auth:{user: "sistema@suite8.com.br",pass: "i}K7/*kOFgI6"}
+          auth:{user: process.env['emailuser'],pass: process.env['pass']}
           
         });
 
         var emailASerEnviado = {
 
-        from: "sistema@suite8.com.br",
+        from: process.env['emailuser'],
         to: email,
         subject: "Recuperação de senha",
         html: "Sua senha é: <b>"+data[0].password+"</b>",
