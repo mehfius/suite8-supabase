@@ -23,8 +23,6 @@ module.exports = function(app){
   app.post('/deletefile', async function(req,res){
 
     const conn     = app.config.supa();
-
-      app.config.log(conn,req.body);
     const session  = req.body.session;
     const filename = req.body.filename;
 

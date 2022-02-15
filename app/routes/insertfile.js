@@ -4,11 +4,6 @@ module.exports = function(app){
 
     const conn     = app.config.supa();
 
-/*     var path = require('path');
-
-    var pagename = path.basename(__filename);
-
-    app.config.log(conn,req.body,pagename); */
     
     const session  = req.body.session;
     const filename = req.body.filename;

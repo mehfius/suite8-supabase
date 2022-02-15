@@ -1,14 +1,15 @@
+const now = new Date(new Date()-3600*1000*3).toISOString();
+
 module.exports = function(app){
 
   app.post('/formsave', function(req,res){
 
     const save = async function(modules,json){
 
-      if(modules!=="users"){
+      if(modules=="prontuarios"){
         
         json.share = (json.share)?JSON.parse(json.share):null;
         json.users = json.info.users;
-
 
         if(json.info.areas==50){
 
@@ -20,17 +21,19 @@ module.exports = function(app){
 
         }
 
-        const now = new Date(new Date()-3600*1000*3).toISOString();
-
         if(!json.id){
 
           json.created_at=now;
           
         }
 
-        json.update=now;
+         json.update=now;
 
-      }else{
+      }else if(modules=="mvb"){
+
+
+
+      }else if(modules=="users"){
 
          json.whatsapp = (json.whatsapp)?json.whatsapp.replace(/[^0-9]/g, ''):null;
          json.telefone = (json.telefone)?json.telefone.replace(/[^0-9]/g, ''):null;
@@ -43,6 +46,11 @@ module.exports = function(app){
 
       let { data , error } = await conn.from(modules).upsert(json);
 
+      if(error){
+
+        console.log(error);
+        
+      }
  
       return data;    
   
@@ -58,16 +66,12 @@ module.exports = function(app){
 
     const conn    = app.config.supa();
 
-    var path = require('path');
-
-    var pagename = path.basename(__filename);
-
-    app.config.log(conn,req.body,pagename);
+    app.config.log(req.body,"formsave.js");
 
     const json    = req.body.data;
 
     const id      = json.id;
-    const session = json.session;
+    const session = req.body.session;
     const modules = json.modules;
 
     delete json["session"];

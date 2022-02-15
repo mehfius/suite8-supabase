@@ -12,10 +12,7 @@ module.exports = function(app){
     
     const connection = app.config.supa();
 
-    var path = require('path');
-
-       var pagename = path.basename(__filename);
-            app.config.log(app.config.supa(),req.body,pagename);
+    app.config.log(req.body,"modules.js");
 
     const main = async function (){
 

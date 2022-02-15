@@ -27,28 +27,23 @@ module.exports = function(app){
 
         passRecovery(email);
 
-        var nodemailer = require("nodemailer");
-        
-        var remetente = nodemailer.createTransport({
-
-          host: process.env['emailhost'],
-          service: process.env['emailhost'],
-          port: 587,
-          secure: false,
-          auth:{user: process.env['emailuser'],pass: process.env['pass']}
-          
-        });
-
-        var emailASerEnviado = {
-
-        from: process.env['emailuser'],
-        to: email,
-        subject: "Recuperação de senha",
-        html: "Sua senha é: <b>"+data[0].password+"</b>",
-
-        };
-
-        remetente.sendMail(emailASerEnviado, function(error){});
+          const sgMail = require('@sendgrid/mail')
+          sgMail.setApiKey(process.env['SENDGRID_API_KEY'])
+          const msg = {
+            to: email, // Change to your recipient
+            from: {email: process.env['emailuser'],name: 'Doctor8'}, // Change to your verified sender
+            subject: 'Recuperação de senha',
+            text: 'Sua senha é: '+data[0].password,
+            html: 'Sua senha é: <b>'+data[0].password+'</b>',
+          }
+          sgMail
+          .send(msg)
+          .then(() => {
+          console.log('Recuperação : '+email)
+          })
+          .catch((error) => {
+          console.error(error.response.body)
+          })
 
       }
 
