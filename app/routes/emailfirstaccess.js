@@ -8,66 +8,31 @@ module.exports = function(app){
 
   };
 
-const html = `<div id="container" style="font-size:12pt;float:left;height:2000px;width:800px;background-image:url(https://doctor8.com.br/email/firstaccess/img/bg.png);">
+const html = `
+
+<div>
 
   <a href='https://doctor8.com.br/' target='_blank'>
-    <div style="max-width:0;max-height: 0;">
-      <div style="font-family:Verdana !important;display:inline-block;width:400px;height:150px;margin-left:220px;margin-top:85px;line-height:1.4;">
-      </div>
-    </div>
+  <img width="100%" style='display:block;' src='https://doctor8.com.br/email/firstaccess/img/1.png'>
   </a>
 
-  <a href='https://doctor8.com.br/' target='_blank'>
-    <div style="max-width:0;max-height: 0;">
-      <div style="font-family:Verdana !important;display:inline-block;width:200px;height:90px;margin-left:60px;margin-top:630px;line-height:1.4;">
-      </div>
-    </div>
-  </a>
+  <img width="100%" style='display:block;' src='https://doctor8.com.br/email/firstaccess/img/2.png'>
 
   <a href='https://api.whatsapp.com/send?phone=5531971720053' target='_blank'>
-    <div style="max-width:0;max-height: 0;">
-      <div style="font-family:Verdana !important;display:inline-block;width:405px;height:95px;margin-left:60px;margin-top:1560px;line-height:1.4;">
-      </div>
-    </div>
+  <img width="100%" style='display:block;'  src='https://doctor8.com.br/email/firstaccess/img/3.png'>
   </a>
 
-
-  <a href='https://api.whatsapp.com/send?phone=5531971720053' target='_blank'>
-    <div style="max-width:0;max-height: 0;">
-      <div style="font-family:Verdana !important;display:inline-block;width:50px;height:50px;margin-left:240px;margin-top:1800px;line-height:1.4;">
-      </div>
-    </div>
+  <a href='https://linktr.ee/doctor_8' target='_blank'>
+  <img width="100%" style='display:block;' src='https://doctor8.com.br/email/firstaccess/img/4.png'>
   </a>
 
-  
-  <a href='https://t.me/doctor8med' target='_blank'>
-    <div style="max-width:0;max-height: 0;">
-      <div style="font-family:Verdana !important;display:inline-block;width:50px;height:50px;margin-left:340px;margin-top:1800px;line-height:1.4;">
-      </div>
-    </div>
-  </a>
+</div>
 
-  
-  <a href='https://www.facebook.com/Doctor8.Oficial' target='_blank'>
-    <div style="max-width:0;max-height: 0;">
-      <div style="font-family:Verdana !important;display:inline-block;width:50px;height:50px;margin-left:426px;margin-top:1800px;line-height:1.4;">
-      </div>
-    </div>
-  </a>
-
-  
-  <a href='https://www.gettr.com/user/doctor8' target='_blank'>
-    <div style="max-width:0;max-height: 0;">
-      <div style="font-family:Verdana !important;display:inline-block;width:50px;height:50px;margin-left:518px;margin-top:1800px;line-height:1.4;">
-      </div>
-    </div>
-  </a>
-
-  </div>`;
+`;
 
   app.get('/emailfirstaccess', function(req,res){
 
-    //const email    = 'fernandohsilva@outlook.com.br';
+    const email    = 'matheus.ferraz@gmail.com';
     const status   = {};
 
 

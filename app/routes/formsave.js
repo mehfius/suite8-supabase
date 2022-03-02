@@ -40,7 +40,7 @@ module.exports = function(app){
          json.cep      = (json.cep)?json.cep.replace(/[^0-9]/g, ''):null;
 
       }
-
+console.log(json);
 
       delete json["info"];
 
