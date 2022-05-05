@@ -31,8 +31,13 @@ module.exports = function(app){
 
       }else if(modules=="mvb"){
 
-
-
+      }else if(modules=="usersremedios"){
+        
+        json.users  = json.info.users;
+        json.update = now;
+        
+        console.log(json);
+        
       }else if(modules=="users"){
 
          json.whatsapp = (json.whatsapp)?json.whatsapp.replace(/[^0-9]/g, ''):null;
@@ -40,7 +45,6 @@ module.exports = function(app){
          json.cep      = (json.cep)?json.cep.replace(/[^0-9]/g, ''):null;
 
       }
-console.log(json);
 
       delete json["info"];
 

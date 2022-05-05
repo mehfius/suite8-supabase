@@ -2,6 +2,7 @@ var express     = require("express");
 var consign     = require("consign");
 var cors        = require('cors');
 var bodyParser  = require('body-parser')
+//var fetch       = require('node-fetch');
 
 var app = express();
 
@@ -10,6 +11,7 @@ var app = express();
     app.use(cors());
     app.use(bodyParser.json())
     app.use(bodyParser.urlencoded({extended: true}));
+    //app.use(fetch());
 
 consign()
   .include("app/routes")

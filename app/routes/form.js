@@ -30,8 +30,6 @@ module.exports = function(app){
 
           let { data, error } = await conn.from("form_"+modules).select('*').eq('uuid',session).range(0,1);
 
-          
-
           Object.entries(data[0].form.fields).forEach(([key, value]) => {
 
             if(!value.value){
@@ -41,10 +39,6 @@ module.exports = function(app){
             if(!value.attributes){
               delete(value["attributes"]);
             }
-
- 
-
-  
             
           });
 
@@ -73,7 +67,65 @@ module.exports = function(app){
         });
 
         res.send(data[0]); 
+        
+      }else if(modules=="usersremedios"){
+        
+          if(id){
+            
+            let { data, error } = await conn.from("form_"+modules).select('*').eq('uuid',session).eq('id',id).range(0,1);
+          
+              if(error){
+                
+                console.log(error);
+                
+              }else{
+            
+                Object.entries(data[0].form.fields).forEach(([key, value]) => {
+        
+                  if(!value.value){
+                    delete(value["value"]);
+                  }
+        
+                  if(!value.attributes){
+                    delete(value["attributes"]);
+                  }
+        
+                });
+        
+                res.send(data[0]); 
+                
+              }
+            
+          }else{
 
+            let { data, error } = await conn.from("form_"+modules).select('*').range(0,1);
+            
+              delete data[0].id;
+              delete data[0].uuid;
+            
+              if(error){
+                
+                console.log(error);
+                
+              }else{
+            
+                Object.entries(data[0].form.fields).forEach(([key, value]) => {
+        
+          
+                    delete(value["value"]);
+
+                    delete(value["attributes"]);
+                  
+                    delete(value["uuidv4"]);
+                  
+                });
+        
+                res.send(data[0]); 
+                
+              }
+            
+          }
+        
       }else{
 
         if(id){

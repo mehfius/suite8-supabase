@@ -18,7 +18,7 @@ module.exports = function(app){
 
     }(); */
 
-    res.send("ola");
+    res.send("http on");
 
   });
     
